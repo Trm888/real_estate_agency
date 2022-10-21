@@ -15,7 +15,7 @@ def get_newbuilding_status(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0003_auto_20221021_1836'),
+        ('property', '0002_auto_20221021_0102'),
     ]
 
     operations = [migrations.RunPython(get_newbuilding_status),

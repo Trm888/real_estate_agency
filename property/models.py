@@ -7,6 +7,7 @@ import phonenumbers
 class Flat(models.Model):
     owner = models.CharField('ФИО владельца', max_length=200)
     owner_pure_phone = PhoneNumberField(null=True, blank=True,
+                                        default=None,
                                         verbose_name='Нормализованный номер владельца')
     owners_phonenumber = models.CharField('Номер владельца', max_length=20)
     created_at = models.DateTimeField(

@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
+import phonenumbers
 
 class Flat(models.Model):
     owner = models.CharField('ФИО владельца', max_length=200)

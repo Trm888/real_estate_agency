@@ -4,6 +4,7 @@ from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 import phonenumbers
 
+
 class Flat(models.Model):
     owner = models.CharField('ФИО владельца', max_length=200)
     owner_pure_phone = PhoneNumberField(null=True, blank=True,
@@ -56,9 +57,9 @@ class Flat(models.Model):
                                    verbose_name='Кто лайкнул',
                                    blank=True)
 
-
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
+
 
 class Complaint(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,
@@ -71,3 +72,14 @@ class Complaint(models.Model):
 
     def __str__(self):
         return f'{self.user}, {self.flat}, {self.description}'
+
+
+class Owner(models.Model):
+    owner = models.CharField('ФИО владельца', max_length=200)
+    owners_phonenumber = models.CharField('Номер владельца', max_length=20)
+    owner_pure_phone = PhoneNumberField(null=True, blank=True,
+                                        default=None,
+                                        verbose_name='Нормализованный номер владельца')
+    owner_flats = models.ManyToManyField(Flat, related_name="owner_flats",
+                                         verbose_name='Квартиры в собственности',
+                                         null=True)

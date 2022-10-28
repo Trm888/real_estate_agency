@@ -2,21 +2,18 @@
 
 from django.db import migrations
 
-def get_newbuilding_status(apps, schema_editor):
 
+def get_newbuilding_status(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     for flat in Flat.objects.all():
-        if flat.construction_year < 2015:
-            flat.new_building = False
-        else:
-            flat.new_building = True
+        flat.new_building = flat.construction_year < 2015
         flat.save()
 
-class Migration(migrations.Migration):
 
+class Migration(migrations.Migration):
     dependencies = [
         ('property', '0002_auto_20221021_0102'),
     ]
 
     operations = [migrations.RunPython(get_newbuilding_status),
-    ]
+                  ]

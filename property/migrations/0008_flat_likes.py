@@ -15,6 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='flat',
             name='likes',
-            field=models.ManyToManyField(related_name='liked_flats', to=settings.AUTH_USER_MODEL),
+            field=models.ManyToManyField(related_name='liked_flats',
+                                         to=settings.AUTH_USER_MODEL),
         ),
     ]

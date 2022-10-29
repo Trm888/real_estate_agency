@@ -4,13 +4,13 @@ from django.db import migrations
 import phonenumbers
 
 def get_norm_number(apps, schema_editor):
-
     Flat = apps.get_model('property', 'Flat')
     flat_set = Flat.objects.all()
     for flat in flat_set.iterator():
         parse_number = phonenumbers.parse(flat.owners_phonenumber,  "RU")
         if phonenumbers.is_valid_number(parse_number) and parse_number.country_code == 7:
-            serialized_number = phonenumbers.format_number(parse_number, phonenumbers.PhoneNumberFormat.E164)
+            serialized_number = phonenumbers.format_number(parse_number,
+                                                           phonenumbers.PhoneNumberFormat.E164)
             flat.owner_pure_phone = serialized_number
         else:
             flat.owner_pure_phone = None
